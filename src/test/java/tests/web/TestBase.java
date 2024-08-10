@@ -30,6 +30,7 @@ public class TestBase {
         WebConfig webConfig = ConfigFactory.create(WebConfig.class, System.getProperties());
         AuthConfig authConfig = ConfigFactory.create(AuthConfig.class);
 
+        Configuration.browser = webConfig.browser();
         Configuration.browserSize = webConfig.browserSize();
         Configuration.browserVersion = webConfig.browserVersion();
         Configuration.baseUrl = webConfig.baseUrl();
