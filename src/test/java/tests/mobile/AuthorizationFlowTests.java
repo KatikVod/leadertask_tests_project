@@ -2,7 +2,7 @@ package tests.mobile;
 
 import config.AuthConfig;
 import data.MobileTestData;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -10,8 +10,9 @@ import org.junit.jupiter.api.Test;
 import pages.mobile.*;
 
 import static io.qameta.allure.Allure.step;
-
-@Feature("Проверки флоу авторизации и регристрации")
+@Owner("Водолажская Екатерина")
+@Feature("Авторизация")
+@Story("Флоу авторизации в мобильном приложении")
 @Tag("mobile")
 public class AuthorizationFlowTests extends TestBase {
     WelcomeScreen welcomeScreen = new WelcomeScreen();
@@ -23,6 +24,7 @@ public class AuthorizationFlowTests extends TestBase {
     AuthConfig config = ConfigFactory.create(AuthConfig.class);
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Успешная авторизация")
     void successfulAuthorizationTest() {
         step("Не выдавать разрешения", () -> {
@@ -52,6 +54,7 @@ public class AuthorizationFlowTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Проверка возврата на начальный экран")
     void returnToEmailScreenTest() {
         step("Не выдавать разрешения", () -> {
@@ -77,6 +80,7 @@ public class AuthorizationFlowTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Авторизация с новым email, переход к регистрации")
     void authorizationWithNewEmailTest() {
         step("Не выдавать разрешения", () -> {

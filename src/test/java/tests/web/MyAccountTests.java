@@ -2,7 +2,7 @@ package tests.web;
 
 import data.WebTestData;
 import helpers.extensions.WithLogin;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -12,6 +12,7 @@ import pages.web.MyAccountPage;
 
 import static io.qameta.allure.Allure.step;
 
+@Owner("Водолажская Екатерина")
 @Feature("Профиль пользователя")
 @Tag("web")
 public class MyAccountTests extends TestBase {
@@ -20,6 +21,8 @@ public class MyAccountTests extends TestBase {
 
     @Test
     @WithLogin
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Аккаунт и лицензия")
     @DisplayName("Изменение имени пользователя")
     void changeUserNameTest() {
         step("Открыть страницу Аккаунт", () -> {
@@ -38,6 +41,8 @@ public class MyAccountTests extends TestBase {
 
     @Test
     @WithLogin
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Аккаунт и лицензия")
     @DisplayName("Невозможно задать пустое имя пользователя")
     void impossibleToSetEmptyUserNameTest() {
         step("Открыть страницу Аккаунт", () -> {
@@ -56,6 +61,8 @@ public class MyAccountTests extends TestBase {
 
     @Test
     @WithLogin
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Аккаунт и лицензия")
     @DisplayName("Изменить номер телефона пользователя")
     void changePhoneNumberTest() {
         step("Открыть страницу Аккаунт", () -> {
@@ -74,6 +81,8 @@ public class MyAccountTests extends TestBase {
 
     @Test
     @WithLogin
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Аккаунт и лицензия")
     @DisplayName("Невозможно задать номер телефона, состоящий менее чем из 10 цифр")
     void impossibleToSetIncorrectPhoneNumberTest() {
         step("Открыть страницу Аккаунт", () -> {
@@ -91,6 +100,7 @@ public class MyAccountTests extends TestBase {
     }
 
     @WithLogin
+    @Severity(SeverityLevel.NORMAL)
     @CsvFileSource(resources = "/ChooseMenuItem.csv")
     @ParameterizedTest(name = "Для пункта меню {0} должен отображаться заголовок {1}")
     @DisplayName("После перехода в раздел профиля должен отображаться корректный заголовок")

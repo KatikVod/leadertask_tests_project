@@ -3,7 +3,7 @@ package tests.web;
 import api.LeaderTaskApi;
 import data.WebTestData;
 import helpers.extensions.WithLogin;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -13,7 +13,8 @@ import pages.web.ProjectPage;
 import static api.CreateUserApi.email;
 import static io.qameta.allure.Allure.step;
 
-@Feature("Действия с проектом")
+@Owner("Водолажская Екатерина")
+@Feature("Проект")
 @Tag("web")
 public class ProjectTests extends TestBase {
     LeaderTaskApi apiSteps = new LeaderTaskApi();
@@ -28,6 +29,8 @@ public class ProjectTests extends TestBase {
 
     @Test
     @WithLogin
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Действия с проектом")
     @DisplayName("Добавить в проект сотрудника")
     void addEmployeeToProjectTest() {
 
@@ -52,6 +55,8 @@ public class ProjectTests extends TestBase {
 
     @Test
     @WithLogin
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Задачи")
     @DisplayName("Добавить в проект задачу")
     void addTaskToProjectTest() {
 
@@ -68,6 +73,8 @@ public class ProjectTests extends TestBase {
 
     @Test
     @WithLogin
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Подпроект")
     @DisplayName("Создать подпроект")
     void createSubprojectTest() {
 
@@ -90,6 +97,8 @@ public class ProjectTests extends TestBase {
 
     @Test
     @WithLogin
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Подпроект")
     @DisplayName("Невозможно создать подпроект с пустым названием")
     void impossibleToCreateSubprojectWithEmptyNameTest() {
 
@@ -113,6 +122,8 @@ public class ProjectTests extends TestBase {
 
     @Test
     @WithLogin
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Действия с проектом")
     @DisplayName("Удалить проект")
     void deleteProjectTest() {
 
@@ -135,6 +146,8 @@ public class ProjectTests extends TestBase {
 
     @Test
     @WithLogin
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Действия с проектом")
     @DisplayName("Отменить удаление проекта")
     void cancelProjectDeleteTest() {
 

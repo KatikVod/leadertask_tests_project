@@ -1,7 +1,7 @@
 package tests.api;
 
 import data.ApiTestData;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import models.AuthorizationBodyModel;
 import models.AuthorizationResponseModel;
 import models.ErrorResponseModel;
@@ -17,13 +17,16 @@ import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static specs.RequestResponseSpecs.*;
 
-@Feature("Проверки эндпоинта /users/authjson")
+@Owner("Водолажская Екатерина")
+@Feature("Авторизация")
+@Story("Проверки эндпоинта /users/authjson")
 @Tag("api")
 public class AuthorizationTests extends TestBase {
 
     ApiTestData testData = new ApiTestData();
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Успешнaя авторизация пользователя")
     void successfulUserAuthorizationTest() {
         AuthorizationBodyModel authData = new AuthorizationBodyModel();
@@ -49,6 +52,7 @@ public class AuthorizationTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Попытка авторизации с некорректным паролем")
     void authorizationWithWrongPasswordTest() {
         AuthorizationBodyModel authData = new AuthorizationBodyModel();
@@ -72,6 +76,7 @@ public class AuthorizationTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Попытка авторизации с некорректным email")
     void authorizationWithWrongEmailTest() {
         AuthorizationBodyModel authData = new AuthorizationBodyModel();
@@ -95,6 +100,7 @@ public class AuthorizationTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Попытка авторизации без email")
     void authorizationWithoutEmailTest() {
         AuthorizationBodyModel authData = new AuthorizationBodyModel();
@@ -117,6 +123,7 @@ public class AuthorizationTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Попытка авторизации без пароля")
     void authorizationWithoutPasswordTest() {
         AuthorizationBodyModel authData = new AuthorizationBodyModel();
@@ -139,6 +146,7 @@ public class AuthorizationTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Попытка авторизации без атрибута system")
     void authorizationWithoutSystemTest() {
         AuthorizationBodyModel authData = new AuthorizationBodyModel();
@@ -161,6 +169,7 @@ public class AuthorizationTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Попытка авторизации без атрибута type_device")
     void authorizationWithoutTypeDeviceTest() {
         AuthorizationBodyModel authData = new AuthorizationBodyModel();
@@ -183,6 +192,7 @@ public class AuthorizationTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     @DisplayName("Попытка вызвать неподдерживаемый метод GET")
     void tryUsingUnallowedMethodTest() {
         MessageResponseModel response =

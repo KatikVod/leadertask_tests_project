@@ -1,7 +1,7 @@
 package tests.api;
 
 import data.ApiTestData;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import models.CreateProjectBodyModel;
 import models.CreateProjectResponseModel;
 import models.ErrorResponseModel;
@@ -16,13 +16,16 @@ import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static specs.RequestResponseSpecs.*;
 
-@Feature("Проверки эндпоинта /projects")
+@Owner("Водолажская Екатерина")
+@Feature("Проект")
+@Story("Создание проекта")
 @Tag("api")
 public class ProjectsTests extends TestBase {
 
     ApiTestData testData = new ApiTestData();
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Успешное создание проекта с заполнением обязательных атрибутов")
     void createProjectTest() {
         CreateProjectBodyModel projectData = new CreateProjectBodyModel();
@@ -48,6 +51,7 @@ public class ProjectsTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Невозможно создать проект без названия")
     void createProjectWithEmptyNameTest() {
         CreateProjectBodyModel projectData = new CreateProjectBodyModel();
@@ -69,6 +73,7 @@ public class ProjectsTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Невозможно создать проект без uid")
     void createProjectWithEmptyUidTest() {
         CreateProjectBodyModel projectData = new CreateProjectBodyModel();
@@ -90,6 +95,7 @@ public class ProjectsTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Невозможно создать проект без email_creator")
     void createProjectWithEmptyEmailCreatorTest() {
         CreateProjectBodyModel projectData = new CreateProjectBodyModel();
@@ -111,6 +117,7 @@ public class ProjectsTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     @DisplayName("Попытка вызвать неподдерживаемый метод DELETE")
     void tryUsingUnallowedMethodTest() {
         MessageResponseModel response =
