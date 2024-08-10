@@ -2,6 +2,7 @@ package pages.web.components;
 
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -12,8 +13,8 @@ public class MainMenuComponent {
         projectTree.shouldHave(text(projectName));
     }
 
-    public void checkProjectNotExist(String projectName) {
-        projectTree.shouldNotHave(text(projectName));
+    public void checkProjectTreeNotExist() {
+        projectTree.shouldNot(exist);
     }
 
 }

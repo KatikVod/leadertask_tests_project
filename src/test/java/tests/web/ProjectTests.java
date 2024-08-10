@@ -128,8 +128,8 @@ public class ProjectTests extends TestBase {
         step("Подтвердить удаление проекта", () -> {
             projectPage.confirmDeleteProject();
         });
-        step("Проверить, что проект не отображается в дереве проектов", () -> {
-            projectPage.checkProjectIsDeleted(testData.projectName);
+        step("Проверить, что проект удален", () -> {
+            projectPage.checkProjectIsDeleted();
         });
     }
 

@@ -100,8 +100,8 @@ public class ProjectPage {
         return this;
     }
 
-    public ProjectPage checkProjectIsDeleted(String projectName) {
-        mainMenu.checkProjectNotExist(projectName);
+    public ProjectPage checkProjectIsDeleted() {
+        mainMenu.checkProjectTreeNotExist();
         assertThat(getWebDriver().getCurrentUrl()).isEqualTo("https://www.leadertask.ru/web/tasks/today");
         return this;
     }
