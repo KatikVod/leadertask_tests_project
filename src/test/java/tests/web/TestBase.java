@@ -26,6 +26,7 @@ public class TestBase {
         RestAssured.baseURI = apiConfig.baseURI();
         RestAssured.basePath = apiConfig.basePath();
 
+        String browserHost = System.getProperty("browserHost", "remote");
         WebConfig webConfig = ConfigFactory.create(WebConfig.class, System.getProperties());
         AuthConfig authConfig = ConfigFactory.create(AuthConfig.class);
 
@@ -35,16 +36,15 @@ public class TestBase {
         Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 10000;
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-
-        Configuration.browserCapabilities = capabilities;
-
-        if (System.getProperty("browserHost", "remote").equals("remote")) {
+        if (browserHost.equals("remote")) {
             Configuration.remote = authConfig.remoteUrl();
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                    "enableVNC", true,
+                    "enableVideo", true
+            ));
+
+            Configuration.browserCapabilities = capabilities;
         }
     }
 

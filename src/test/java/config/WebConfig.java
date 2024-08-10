@@ -19,6 +19,4 @@ public interface WebConfig extends Config {
     @DefaultValue("https://www.leadertask.ru/web")
     String baseUrl();
 
-    @DefaultValue("false")
-    boolean isRemote();
 }
