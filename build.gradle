@@ -1,0 +1,84 @@
+plugins {
+    id 'java-library'
+    id 'io.qameta.allure' version '2.11.2'
+    id "io.freefair.lombok" version "8.6"
+}
+
+def selenideVersion = "6.13.0",
+    restAssuredVersion = "5.4.0",
+    allureVersion = "2.27.0",
+    javaFakerVersion = "1.0.2",
+    junitVersion = "5.10.2",
+    slf4jVersion = "2.0.7",
+    ownerVersion = "1.0.12",
+    assertjVersion = "3.26.0",
+    appiumVersion = "8.4.0"
+
+allure {
+    report {
+        version.set(allureVersion)
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set(allureVersion)
+            }
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+
+dependencies {
+    testImplementation(
+            "com.codeborne:selenide:$selenideVersion",
+            "io.qameta.allure:allure-selenide:$allureVersion",
+            "io.rest-assured:rest-assured:$restAssuredVersion",
+            "io.rest-assured:json-schema-validator:$restAssuredVersion",
+            "io.qameta.allure:allure-rest-assured:$allureVersion",
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            "org.slf4j:slf4j-simple:$slf4jVersion",
+            "org.assertj:assertj-core:$assertjVersion",
+            "org.aeonbits.owner:owner:$ownerVersion",
+            "com.github.javafaker:javafaker:$javaFakerVersion",
+            "io.appium:java-client:$appiumVersion"
+    )
+    runtimeOnly 'org.aspectj:aspectjweaver:1.9.22.1'
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+
+task mobile(type: Test) {
+    useJUnitPlatform {
+        includeTags("mobile")
+    }
+}
+task web(type: Test) {
+    useJUnitPlatform {
+        includeTags("web")
+    }
+}
+
+task api(type: Test) {
+    useJUnitPlatform {
+        includeTags("api")
+    }
+}
