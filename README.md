@@ -209,11 +209,14 @@ clean ${TASK}
 -"DbaseUrl=${BASE_URL}
 ```
 Для запуска сборки необходимо перейти в раздел <code>Собрать с параметрами</code>, задать параметры и нажать кнопку <code>Собрать</code>.
+
 <p align="center">
 <img title="Jenkins" src="media/screenshots/jenkins-1.png">
 </p>
+
 После выполнения сборки, в блоке <code>История сборок</code> напротив номера сборки появятся значок <code>Allure Report</code>, при клике на который открывается страница со сформированным html-отчетом и тестовой документацией соответственно,
 а так же значок <code>Allure TestOps</code> при клике на который открывается страница проекта в <code>Allure TestOps</code>.
+
 <p align="center">
 <img title="Jenkins" src="media/screenshots/jenkins-2.png">
 </p>
