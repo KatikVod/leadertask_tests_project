@@ -18,15 +18,15 @@ import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
-public class TestBase {
+public class WebTestBase {
+    public static String browserHost = System.getProperty("browserHost", "remote");
+
     @BeforeAll
     static void beforeAll() {
-
         ApiConfig apiConfig = ConfigFactory.create(ApiConfig.class);
         RestAssured.baseURI = apiConfig.baseURI();
         RestAssured.basePath = apiConfig.basePath();
 
-        String browserHost = System.getProperty("browserHost", "remote");
         WebConfig webConfig = ConfigFactory.create(WebConfig.class, System.getProperties());
         AuthConfig authConfig = ConfigFactory.create(AuthConfig.class);
 
@@ -58,7 +58,10 @@ public class TestBase {
     void addAttachments() {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
-        Attach.addVideo();
+        Attach.browserConsoleLogs();
+        if (browserHost.equals("remote")) {
+            Attach.addVideo();
+        }
         closeWebDriver();
     }
 }

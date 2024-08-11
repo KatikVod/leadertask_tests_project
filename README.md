@@ -116,7 +116,7 @@ flowchart LR
 ### Локальный запуск тестов
 
 > Для запуска мобильных тестов на своем устройстве необходимо заменить параметры в файле real.properties  
-> Для запуска мобильных тестов на своем устройстве гнобходимо изменить параметры в файле emulator.properties
+> Для запуска мобильных тестов на своем устройстве необходимо изменить параметры в файле emulator.properties
 
 Запуск всех тестов
 ```
@@ -127,19 +127,19 @@ gradle clean test -DbrowserHost=local -DdeviceHost=real
 gradle clean web -DbrowserHost=local
 ```
 
-Если требуется передать параметры отличные от дефолтных в интерфейсе WebConfig  
-то можно изменить интерфейс, либо передать свои параметры в переменных при запуске тестов:
+Если требуется передать параметры отличные отличные от заданных в `local.properties`, можно передать свои параметры в переменных при запуске:
 
 - `browser` – браузер, в котором будут выполняться тесты
 - `browserSize` – размер окна браузера, в котором будут выполняться тесты
 - `browserVersion` – версия браузера, в котором будут выполняться тесты
-
+- `baseUrl` - адрес веб-приложения
  ```
 gradle clean test 
 -DbrowserHost=local
 -Dbrowser=chrome
 -DbrowserSize=1920x1080
 -DbrowserVersion=120.0
+-DbaseUrl=https://www.leadertask.ru/web
 ```
 Запуск API тестов
 ```
@@ -170,17 +170,18 @@ gradle clean web
 gradle clean web -DbrowserHost=remote
 ```
 
-Если требуется передать параметры отличные от дефолтных в интерфейсе WebConfig  
-то можно изменить интерфейс, либо передать свои параметры в переменных при запуске тестов  
+Если требуется передать параметры, отличные от заданных в `remote.properties`, можно передать свои параметры в переменных при запуске:  
 
 - `browser` – браузер, в котором будут выполняться тесты
 - `browserVersion` – версия браузера, в которой будут выполняться тесты
 - `browserSize` – размер окна браузера, в котором будут выполняться тесты
+- `baseUrl` - адрес веб-приложения
 ```
 gradle clean test 
 -Dbrowser=chrome
 -DbrowserVersion=99.0
 -DbrowserSize=1920x1080
+-DbaseUrl=https://www.leadertask.ru/web
 ```
 Запуск мобильных тестов на BrowserStack
 ```
@@ -205,6 +206,7 @@ clean ${TASK}
 -"Dbrowser=${BROWSER}"
 -"DbrowserSize=${BROWSER_SIZE}"
 -"DbrowserVersion=${BROWSER_VERSION}"
+-"DbaseUrl=${BASE_URL}
 ```
 Для запуска сборки необходимо перейти в раздел <code>Собрать с параметрами</code>, задать параметры и нажать кнопку <code>Собрать</code>.
 <p align="center">
@@ -218,18 +220,21 @@ clean ${TASK}
 
 ---
 ## <img width="4%" style="vertical-align:middle" title="Allure_Report" src="media/logo/Allure_Report.svg"> Интеграция с [Allure Report](https://jenkins.autotests.cloud/job/C27-girlonthemars-HW23-LeaderTask-Tests-Project/19/allure/)
-В отчете отображаются: 
-- дата и время теста
-- общее количество запущенных тестов
-- диаграмма с процентом и количеством успешных, упавших и сломанных тестов
+`Allure Report` - инструмент для генерации и визуализации отчетов о выполнении тестов который позволяет представлять результаты тестирования в наглядной и удобной форме.
 
 ### Диаграмма прохождения тестов
+В разделе отображаются:
+- дата и время теста
+- общее количество выполненных тестов
+- диаграмма статусов тестов
+- график трендов, отображающий изменения в результатах тестирования с течением времени
 
 <p align="center">  
 <img title="Allure Overview Dashboard" src="media/screenshots/allure-1.png">  
 </p>  
 
 ### Развернутый результат прохождения тестов
+В разделе отображаются:
 - Список автотестов, разбитый на сьюты или фичи
 - Шаги автотеста
 - Вложения (скриншот/видео прохождения/код страницы)
@@ -239,21 +244,31 @@ clean ${TASK}
 </p>
 
 ### Графики
+В разделе отображаются:
+- круговая диаграмма распределния результатов тестов по статусам
+- диаграмма распределения тестов по severity
+- диаграмма распределения тестов по времени выполнения
+- графики трендов: по врмени выполнения, статусам, категориям
+
 <p align="center">  
 <img title="Allure Graphs" src="media/screenshots/allure-3.png">  
 </p>
 
 ---
 ## <img width="4%" style="vertical-align:middle" title="Allure_TestOps" src="media/logo/Allure_TO.svg"> Интеграция с [Allure TestOps](https://allure.autotests.cloud/project/4369/dashboards)
-
+`Allure TestOps` - платформа для управления тестированием, которая предоставляет обширный набор для организации, выполнения и анализа тестов в проектах.
 ### Дашборд
+Сводная информация о текущем состоянии тестирования проекта:
+- общее количество тест-кейсов
+- процент автоматизации кейсов
+- статистика по запускам
 
 <p align="center">  
 <img title="Allure TestOps Dashboard" src="media/screenshots/testops-1.png">  
 </p>
 
 ### Тест-кейсы
-Пример «живой документации».
+Пример «живой документации»: тест-кейсы, сгенерированные на основе автотестов, с описанием шагов и разбиенем на фичи и стори.
 
 <p align="center">  
 <img title="Allure TestOps Test Cases" src="media/screenshots/testops-2.png">  
@@ -283,17 +298,23 @@ clean ${TASK}
 ---
 ## <img width="4%" style="vertical-align:middle" title="Jira" src="media/logo/Jira.svg"> Интеграция с [Jira](https://jira.autotests.cloud/browse/HOMEWORK-1315)
 
-### В Jira создана задача
+Интеграция `Jira` и `Allure TestOps` позволяет связать задачи и тестовую документацию, что упрощает отслеживаение статуса тестирования в контексте задач и позволяет более эффективно управлять качеством продукта.
+### Задача в  Jira 
+
 <p align="center">  
 <img title="Jira Task" src="media/screenshots/jira-1.png">  
 </p>
 
-### В разделе `Allure:Test Cases` отображаются связаные тест-кейсы из Allure TestOps
+### Раздел Allure: Test Cases
+В данном разделе отображаются связанные с задачей тест-кейсы.
+
 <p align="center">  
 <img title="Jira Test Cases" src="media/screenshots/jira-2.png">  
 </p>
 
-### В разделе `Allure:Launches` отображаются связанные запуски прогонов из Allure TestOps
+### Раздел Allure: Launches 
+В данном разделе отображаются связанные запуски прогонов из Allure TestOps.
+
 <p align="center">  
 <img title="Jira Launches" src="media/screenshots/jira-3.png">  
 </p>

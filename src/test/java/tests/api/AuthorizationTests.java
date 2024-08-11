@@ -21,7 +21,7 @@ import static specs.RequestResponseSpecs.*;
 @Feature("Авторизация")
 @Story("Проверки эндпоинта /users/authjson")
 @Tag("api")
-public class AuthorizationTests extends TestBase {
+public class AuthorizationTests extends ApiTestBase {
 
     ApiTestData testData = new ApiTestData();
 

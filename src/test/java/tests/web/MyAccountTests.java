@@ -15,7 +15,7 @@ import static io.qameta.allure.Allure.step;
 @Owner("Водолажская Екатерина")
 @Feature("Профиль пользователя")
 @Tag("web")
-public class MyAccountTests extends TestBase {
+public class MyAccountTests extends WebTestBase {
     MyAccountPage myAccountPage = new MyAccountPage();
     WebTestData testData = new WebTestData();
 

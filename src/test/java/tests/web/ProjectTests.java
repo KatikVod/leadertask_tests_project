@@ -16,7 +16,7 @@ import static io.qameta.allure.Allure.step;
 @Owner("Водолажская Екатерина")
 @Feature("Проект")
 @Tag("web")
-public class ProjectTests extends TestBase {
+public class ProjectTests extends WebTestBase {
     LeaderTaskApi apiSteps = new LeaderTaskApi();
     ProjectPage projectPage = new ProjectPage();
     WebTestData testData;

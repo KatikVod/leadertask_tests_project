@@ -10,11 +10,12 @@ import org.junit.jupiter.api.Test;
 import pages.mobile.*;
 
 import static io.qameta.allure.Allure.step;
+
 @Owner("Водолажская Екатерина")
 @Feature("Авторизация")
 @Story("Флоу авторизации в мобильном приложении")
 @Tag("mobile")
-public class AuthorizationFlowTests extends TestBase {
+public class AuthorizationFlowTests extends MobileTestBase {
     WelcomeScreen welcomeScreen = new WelcomeScreen();
     EnterEmailScreen enterEmailScreen = new EnterEmailScreen();
     SignUpScreen signUpScreen = new SignUpScreen();

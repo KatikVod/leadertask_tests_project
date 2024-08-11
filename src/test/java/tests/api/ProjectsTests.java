@@ -20,7 +20,7 @@ import static specs.RequestResponseSpecs.*;
 @Feature("Проект")
 @Story("Создание проекта")
 @Tag("api")
-public class ProjectsTests extends TestBase {
+public class ProjectsTests extends ApiTestBase {
 
     ApiTestData testData = new ApiTestData();
 
