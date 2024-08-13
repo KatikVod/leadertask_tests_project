@@ -20,7 +20,7 @@ import java.util.Map;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class WebTestBase {
-    public static String browserHost = System.getProperty("browserHost", "remote");
+    public static final String browserHost = System.getProperty("browserHost", "remote");
     WebTestData testData;
 
     @BeforeAll

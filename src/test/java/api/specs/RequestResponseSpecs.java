@@ -11,7 +11,7 @@ import static io.restassured.http.ContentType.JSON;
 
 public class RequestResponseSpecs {
 
-    public static RequestSpecification defaultLoggingRequestSpec = with()
+    public static final RequestSpecification defaultLoggingRequestSpec = with()
             .filter(withCustomTemplates())
             .log().all()
             .contentType(JSON);
@@ -24,21 +24,21 @@ public class RequestResponseSpecs {
                 .contentType(JSON);
     }
 
-    public static ResponseSpecification successful200ResponseSpec = new ResponseSpecBuilder()
+    public static final ResponseSpecification successful200ResponseSpec = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .log(ALL)
             .build();
-    public static ResponseSpecification error500ResponseSpec = new ResponseSpecBuilder()
+    public static final ResponseSpecification error500ResponseSpec = new ResponseSpecBuilder()
             .expectStatusCode(500)
             .log(ALL)
             .build();
 
-    public static ResponseSpecification error405ResponseSpec = new ResponseSpecBuilder()
+    public static final ResponseSpecification error405ResponseSpec = new ResponseSpecBuilder()
             .expectStatusCode(405)
             .log(ALL)
             .build();
 
-    public static ResponseSpecification error400ResponseSpec = new ResponseSpecBuilder()
+    public static final ResponseSpecification error400ResponseSpec = new ResponseSpecBuilder()
             .expectStatusCode(400)
             .log(ALL)
             .build();

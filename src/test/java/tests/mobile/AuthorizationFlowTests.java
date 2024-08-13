@@ -16,13 +16,13 @@ import static io.qameta.allure.Allure.step;
 @Story("Флоу авторизации в мобильном приложении")
 @Tag("mobile")
 public class AuthorizationFlowTests extends MobileTestBase {
-    WelcomeScreen welcomeScreen = new WelcomeScreen();
-    EnterEmailScreen enterEmailScreen = new EnterEmailScreen();
-    SignUpScreen signUpScreen = new SignUpScreen();
-    SignInScreen signInScreen = new SignInScreen();
-    TodayScreen todayScreen = new TodayScreen();
-    MobileTestData testData = new MobileTestData();
-    AuthConfig config = ConfigFactory.create(AuthConfig.class);
+    final WelcomeScreen welcomeScreen = new WelcomeScreen();
+    final EnterEmailScreen enterEmailScreen = new EnterEmailScreen();
+    final SignUpScreen signUpScreen = new SignUpScreen();
+    final SignInScreen signInScreen = new SignInScreen();
+    final TodayScreen todayScreen = new TodayScreen();
+    final MobileTestData testData = new MobileTestData();
+    final AuthConfig config = ConfigFactory.create(AuthConfig.class);
 
     @Test
     @Severity(SeverityLevel.BLOCKER)

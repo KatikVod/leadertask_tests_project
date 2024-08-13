@@ -21,8 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Story("Проверки эндпоинта /users/authjson")
 @Tag("api")
 public class AuthorizationTests extends ApiTestBase {
-    ApiTestData testData = new ApiTestData();
-    CreateUserApi newUser = new CreateUserApi();
+    final ApiTestData testData = new ApiTestData();
+    final CreateUserApi newUser = new CreateUserApi();
 
     @Test
     @Severity(SeverityLevel.BLOCKER)

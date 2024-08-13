@@ -17,17 +17,15 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class MobileTestBase {
 
-    public static String deviceHost = System.getProperty("envMobile", "browserstack");
+    public static final String deviceHost = System.getProperty("envMobile", "browserstack");
 
     @BeforeAll
     static void beforeAll() {
         Configuration.browserSize = null;
-        if (deviceHost.equals("browserstack")) {
-            Configuration.browser = BrowserstackDriver.class.getName();
-        } else if (deviceHost.equals("emulation")) {
-            Configuration.browser = EmulatorMobileDriver.class.getName();
-        } else if (deviceHost.equals("real")) {
-            Configuration.browser = RealMobileDriver.class.getName();
+        switch (deviceHost) {
+            case "browserstack" -> Configuration.browser = BrowserstackDriver.class.getName();
+            case "emulation" -> Configuration.browser = EmulatorMobileDriver.class.getName();
+            case "real" -> Configuration.browser = RealMobileDriver.class.getName();
         }
     }
 

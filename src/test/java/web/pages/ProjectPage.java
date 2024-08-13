@@ -22,7 +22,7 @@ public class ProjectPage {
             projectPropertiesButton = $(byText("Свойства проекта")),
             rightMenu = $("#aside-right");
 
-    MainMenuComponent mainMenu = new MainMenuComponent();
+    final MainMenuComponent mainMenu = new MainMenuComponent();
 
     public ProjectPage openPage(String projectUid, String projectName) {
         open("/project/" + projectUid);

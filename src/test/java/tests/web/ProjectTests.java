@@ -18,11 +18,11 @@ import static io.qameta.allure.Allure.step;
 @Feature("Проект")
 @Tag("web")
 public class ProjectTests extends WebTestBase {
-    LeaderTaskApiSteps apiSteps = new LeaderTaskApiSteps();
-    ProjectPage projectPage = new ProjectPage();
-    ModalWindow modalWindow = new ModalWindow();
-    ConfirmWindow confirmWindow = new ConfirmWindow();
-    EmployeesWindow employeesWindow = new EmployeesWindow();
+    final LeaderTaskApiSteps apiSteps = new LeaderTaskApiSteps();
+    final ProjectPage projectPage = new ProjectPage();
+    final ModalWindow modalWindow = new ModalWindow();
+    final ConfirmWindow confirmWindow = new ConfirmWindow();
+    final EmployeesWindow employeesWindow = new EmployeesWindow();
 
     @Test
     @WithLogin

@@ -3,9 +3,9 @@ package common.data;
 import com.github.javafaker.Faker;
 
 public class CreateUserData {
-    Faker faker = new Faker();
-    public String userName = faker.name().fullName(),
-            userPassword = faker.internet().password(),
-            userEmail = faker.internet().emailAddress(),
-            userPhoneNumber = "+7" + faker.number().digits(10);
+    final Faker faker = new Faker();
+    public final String userName = faker.name().fullName();
+    public final String userPassword = faker.internet().password();
+    public final String userEmail = faker.internet().emailAddress();
+    public final String userPhoneNumber = "+7" + faker.number().digits(10);
 }

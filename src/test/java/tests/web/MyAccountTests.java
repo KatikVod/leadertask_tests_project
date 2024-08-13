@@ -16,8 +16,8 @@ import static io.qameta.allure.Allure.step;
 @Feature("Профиль пользователя")
 @Tag("web")
 public class MyAccountTests extends WebTestBase {
-    MyAccountPage myAccountPage = new MyAccountPage();
-    ModalWindow modalWindow = new ModalWindow();
+    final MyAccountPage myAccountPage = new MyAccountPage();
+    final ModalWindow modalWindow = new ModalWindow();
 
     @Test
     @WithLogin

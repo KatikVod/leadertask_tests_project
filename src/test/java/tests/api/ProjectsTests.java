@@ -22,8 +22,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Tag("api")
 public class ProjectsTests extends ApiTestBase {
 
-    ApiTestData testData = new ApiTestData();
-    CreateUserApi newUser = new CreateUserApi();
+    final ApiTestData testData = new ApiTestData();
+    final CreateUserApi newUser = new CreateUserApi();
 
     @Test
     @Severity(SeverityLevel.BLOCKER)

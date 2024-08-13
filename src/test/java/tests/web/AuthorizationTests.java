@@ -16,9 +16,9 @@ import static io.qameta.allure.Allure.step;
 @Story("Авторизация")
 @Tag("web")
 public class AuthorizationTests extends WebTestBase {
-    AuthorizationPage authorizationPage = new AuthorizationPage();
-    TodayPage todayPage = new TodayPage();
-    AuthConfig config = ConfigFactory.create(AuthConfig.class);
+    final AuthorizationPage authorizationPage = new AuthorizationPage();
+    final TodayPage todayPage = new TodayPage();
+    final AuthConfig config = ConfigFactory.create(AuthConfig.class);
 
     @Test
     @Severity(SeverityLevel.CRITICAL)
