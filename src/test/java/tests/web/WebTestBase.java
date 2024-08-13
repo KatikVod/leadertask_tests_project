@@ -2,10 +2,11 @@ package tests.web;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import config.ApiConfig;
-import config.AuthConfig;
-import config.WebConfig;
-import helpers.Attach;
+import common.config.ApiConfig;
+import common.config.AuthConfig;
+import common.config.WebConfig;
+import common.data.WebTestData;
+import common.helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import org.aeonbits.owner.ConfigFactory;
@@ -20,6 +21,7 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class WebTestBase {
     public static String browserHost = System.getProperty("browserHost", "remote");
+    WebTestData testData;
 
     @BeforeAll
     static void beforeAll() {
@@ -52,6 +54,7 @@ public class WebTestBase {
     @BeforeEach
     void addListener() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+        testData = new WebTestData();
     }
 
     @AfterEach

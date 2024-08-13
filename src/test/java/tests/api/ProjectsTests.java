@@ -1,20 +1,20 @@
 package tests.api;
 
-import data.ApiTestData;
+import api.methods.CreateUserApi;
+import api.models.CreateProjectBodyModel;
+import api.models.CreateProjectResponseModel;
+import api.models.ErrorResponseModel;
+import api.models.MessageResponseModel;
+import common.data.ApiTestData;
 import io.qameta.allure.*;
-import models.CreateProjectBodyModel;
-import models.CreateProjectResponseModel;
-import models.ErrorResponseModel;
-import models.MessageResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static api.CreateUserApi.*;
+import static api.specs.RequestResponseSpecs.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
-import static specs.RequestResponseSpecs.*;
 
 @Owner("Водолажская Екатерина")
 @Feature("Проект")
@@ -23,6 +23,7 @@ import static specs.RequestResponseSpecs.*;
 public class ProjectsTests extends ApiTestBase {
 
     ApiTestData testData = new ApiTestData();
+    CreateUserApi newUser = new CreateUserApi();
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
@@ -30,12 +31,12 @@ public class ProjectsTests extends ApiTestBase {
     void createProjectTest() {
         CreateProjectBodyModel projectData = new CreateProjectBodyModel();
         projectData.setUid(testData.projectUid);
-        projectData.setEmailCreator(email);
+        projectData.setEmailCreator(newUser.getEmail());
         projectData.setName(testData.projectName);
 
         CreateProjectResponseModel response =
                 step("Отправить запрос на создание проекта и проверить, что в ответе получен статус 200", () ->
-                        given(authorisedRequestSpec(token))
+                        given(authorisedRequestLoggingSpec(newUser.getToken()))
                                 .body(projectData)
                                 .when()
                                 .post("/projects")
@@ -44,7 +45,7 @@ public class ProjectsTests extends ApiTestBase {
                                 .extract().as(CreateProjectResponseModel.class));
 
         step("Проверить данные ответа", () -> {
-            assertThat(response.getEmailCreator()).isEqualTo(email);
+            assertThat(response.getEmailCreator()).isEqualTo(newUser.getEmail());
             assertThat(response.getName()).isEqualTo(testData.projectName);
             assertThat(response.getUid()).isEqualTo(testData.projectUid);
         });
@@ -56,11 +57,11 @@ public class ProjectsTests extends ApiTestBase {
     void createProjectWithEmptyNameTest() {
         CreateProjectBodyModel projectData = new CreateProjectBodyModel();
         projectData.setUid(testData.projectUid);
-        projectData.setEmailCreator(email);
+        projectData.setEmailCreator(newUser.getEmail());
 
         ErrorResponseModel response =
                 step("Отправить запрос на создание проекта и проверить, что в ответе получен статус 500", () ->
-                        given(authorisedRequestSpec(token))
+                        given(authorisedRequestLoggingSpec(newUser.getToken()))
                                 .body(projectData)
                                 .when()
                                 .post("/projects")
@@ -78,11 +79,11 @@ public class ProjectsTests extends ApiTestBase {
     void createProjectWithEmptyUidTest() {
         CreateProjectBodyModel projectData = new CreateProjectBodyModel();
         projectData.setName("просто название");
-        projectData.setEmailCreator(email);
+        projectData.setEmailCreator(newUser.getEmail());
 
         ErrorResponseModel response =
                 step("Отправить запрос на создание проекта и проверить, что в ответе получен статус 500", () ->
-                        given(authorisedRequestSpec(token))
+                        given(authorisedRequestLoggingSpec(newUser.getToken()))
                                 .body(projectData)
                                 .when()
                                 .post("/projects")
@@ -104,7 +105,7 @@ public class ProjectsTests extends ApiTestBase {
 
         ErrorResponseModel response =
                 step("Отправить запрос на создание проекта и проверить, что в ответе получен статус 500", () ->
-                        given(authorisedRequestSpec(token))
+                        given(authorisedRequestLoggingSpec(newUser.getToken()))
                                 .body(projectData)
                                 .when()
                                 .post("/projects")
@@ -122,7 +123,7 @@ public class ProjectsTests extends ApiTestBase {
     void tryUsingUnallowedMethodTest() {
         MessageResponseModel response =
                 step("Отправить запрос на создание проекта и проверить, что в ответе получен статус 405", () ->
-                        given(authorisedRequestSpec(token))
+                        given(authorisedRequestLoggingSpec(newUser.getToken()))
                                 .when()
                                 .delete("/projects")
                                 .then()

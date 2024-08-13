@@ -1,14 +1,14 @@
 package tests.web;
 
-import data.WebTestData;
-import helpers.extensions.WithLogin;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import pages.web.MyAccountPage;
+import web.extensions.WithLogin;
+import web.pages.MyAccountPage;
+import web.pages.modals.ModalWindow;
 
 import static io.qameta.allure.Allure.step;
 
@@ -17,7 +17,7 @@ import static io.qameta.allure.Allure.step;
 @Tag("web")
 public class MyAccountTests extends WebTestBase {
     MyAccountPage myAccountPage = new MyAccountPage();
-    WebTestData testData = new WebTestData();
+    ModalWindow modalWindow = new ModalWindow();
 
     @Test
     @WithLogin
@@ -32,7 +32,8 @@ public class MyAccountTests extends WebTestBase {
             myAccountPage.clickChangeNameButton();
         });
         step("Заполнить и сохранить новое имя пользователя", () -> {
-            myAccountPage.changeValue(testData.newUserName);
+            modalWindow.changeValue(testData.newUserName);
+            modalWindow.clickSaveButton();
         });
         step("Проверить, что в профиле отображается новое имя пользователя", () -> {
             myAccountPage.checkUserName(testData.newUserName);
@@ -52,10 +53,11 @@ public class MyAccountTests extends WebTestBase {
             myAccountPage.clickChangeNameButton();
         });
         step("Очистить имя пользовател и сохранить", () -> {
-            myAccountPage.clearValue();
+            modalWindow.clearValue();
+            modalWindow.clickSaveButton();
         });
         step("Проверить, что отображается сообщение об ошибке", () -> {
-            myAccountPage.checkErrorMessage("Поле не должно быть пустым");
+            modalWindow.checkErrorMessage("Поле не должно быть пустым");
         });
     }
 
@@ -72,7 +74,8 @@ public class MyAccountTests extends WebTestBase {
             myAccountPage.clickChangePhoneNumberButton();
         });
         step("Ввести и сохранить новый номер телефона", () -> {
-            myAccountPage.changeValue("+7" + testData.userPhoneNumber);
+            modalWindow.changeValue("+7" + testData.userPhoneNumber);
+            modalWindow.clickSaveButton();
         });
         step("Проверить, что номер телефона в профиле изменен", () -> {
             myAccountPage.checkUserPhoneNumber("+7" + testData.userPhoneNumber);
@@ -92,16 +95,17 @@ public class MyAccountTests extends WebTestBase {
             myAccountPage.clickChangePhoneNumberButton();
         });
         step("Ввести и попытаться сохранить некорректный номер телефона", () -> {
-            myAccountPage.changeValue(testData.shortUserPhoneNumber);
+            modalWindow.changeValue(testData.shortUserPhoneNumber);
+            modalWindow.clickSaveButton();
         });
         step("Проверить, что отображается сообщение об ошибке", () -> {
-            myAccountPage.checkErrorMessage("Некорректный номер телефона");
+            modalWindow.checkErrorMessage("Некорректный номер телефона");
         });
     }
 
     @WithLogin
     @Severity(SeverityLevel.NORMAL)
-    @CsvFileSource(resources = "/ChooseMenuItem.csv")
+    @CsvFileSource(resources = "/files/ChooseMenuItem.csv")
     @ParameterizedTest(name = "Для пункта меню {0} должен отображаться заголовок {1}")
     @DisplayName("После перехода в раздел профиля должен отображаться корректный заголовок")
     void chooseMenuItemTest(String menuItemName, String expectedTitle) {

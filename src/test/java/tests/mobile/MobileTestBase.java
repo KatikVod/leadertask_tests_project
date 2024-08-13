@@ -3,17 +3,17 @@ package tests.mobile;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import drivers.BrowserstackDriver;
-import drivers.EmulatorMobileDriver;
-import drivers.RealMobileDriver;
-import helpers.Attach;
+import common.helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
-
+import mobile.drivers.BrowserstackDriver;
+import mobile.drivers.EmulatorMobileDriver;
+import mobile.drivers.RealMobileDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+import static com.codeborne.selenide.Selenide.open;
 
 public class MobileTestBase {
 

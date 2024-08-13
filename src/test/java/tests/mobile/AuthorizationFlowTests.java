@@ -1,13 +1,13 @@
 package tests.mobile;
 
-import config.AuthConfig;
-import data.MobileTestData;
+import common.config.AuthConfig;
+import common.data.MobileTestData;
 import io.qameta.allure.*;
+import mobile.screens.*;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import pages.mobile.*;
 
 import static io.qameta.allure.Allure.step;
 
