@@ -24,12 +24,6 @@ public class ModalWindow {
         return this;
     }
 
-    public ModalWindow changeValue(String newValue) {
-        clearValue();
-        setValue(newValue);
-        return this;
-    }
-
     public ModalWindow clickSaveButton() {
         saveButton.click();
         return this;

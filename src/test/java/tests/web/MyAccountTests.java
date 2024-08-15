@@ -32,8 +32,9 @@ public class MyAccountTests extends WebTestBase {
             myAccountPage.clickChangeNameButton();
         });
         step("Заполнить и сохранить новое имя пользователя", () -> {
-            modalWindow.changeValue(testData.newUserName);
-            modalWindow.clickSaveButton();
+            modalWindow.clearValue()
+                    .setValue(testData.newUserName)
+                    .clickSaveButton();
         });
         step("Проверить, что в профиле отображается новое имя пользователя", () -> {
             myAccountPage.checkUserName(testData.newUserName);
@@ -53,8 +54,8 @@ public class MyAccountTests extends WebTestBase {
             myAccountPage.clickChangeNameButton();
         });
         step("Очистить имя пользовател и сохранить", () -> {
-            modalWindow.clearValue();
-            modalWindow.clickSaveButton();
+            modalWindow.clearValue()
+                    .clickSaveButton();
         });
         step("Проверить, что отображается сообщение об ошибке", () -> {
             modalWindow.checkErrorMessage("Поле не должно быть пустым");
@@ -74,8 +75,9 @@ public class MyAccountTests extends WebTestBase {
             myAccountPage.clickChangePhoneNumberButton();
         });
         step("Ввести и сохранить новый номер телефона", () -> {
-            modalWindow.changeValue("+7" + testData.userPhoneNumber);
-            modalWindow.clickSaveButton();
+            modalWindow.clearValue()
+                    .setValue("+7" + testData.userPhoneNumber)
+                    .clickSaveButton();
         });
         step("Проверить, что номер телефона в профиле изменен", () -> {
             myAccountPage.checkUserPhoneNumber("+7" + testData.userPhoneNumber);
@@ -95,8 +97,9 @@ public class MyAccountTests extends WebTestBase {
             myAccountPage.clickChangePhoneNumberButton();
         });
         step("Ввести и попытаться сохранить некорректный номер телефона", () -> {
-            modalWindow.changeValue(testData.shortUserPhoneNumber);
-            modalWindow.clickSaveButton();
+            modalWindow.clearValue()
+                    .setValue(testData.shortUserPhoneNumber)
+                    .clickSaveButton();
         });
         step("Проверить, что отображается сообщение об ошибке", () -> {
             modalWindow.checkErrorMessage("Некорректный номер телефона");

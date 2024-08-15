@@ -4,22 +4,21 @@ import api.models.CreateUserBodyModel;
 import api.models.CreateUserResponseModel;
 import common.data.CreateUserData;
 import lombok.Getter;
-import lombok.Setter;
 
 import static api.specs.RequestResponseSpecs.defaultLoggingRequestSpec;
 import static api.specs.RequestResponseSpecs.successful200ResponseSpec;
 import static io.restassured.RestAssured.given;
 
 @Getter
-@Setter
 public class CreateUserApi {
     private final CreateUserData newUserData;
-    private String token, email, password;
+    private String token;
+    private final String email, password;
 
     public CreateUserApi() {
         newUserData = new CreateUserData();
-        this.setEmail(getNewUserData().userEmail);
-        this.setPassword(getNewUserData().userPassword);
+        email = getNewUserData().userEmail;
+        password = getNewUserData().userPassword;
         setAuthData();
     }
 
@@ -42,7 +41,7 @@ public class CreateUserApi {
     private void setAuthData() {
         CreateUserResponseModel authResponse = createUserRequest();
         if (authResponse.getAccessToken() != null) {
-            this.setToken(authResponse.getAccessToken());
+            token = authResponse.getAccessToken();
         } else {
             throw new IllegalStateException("Failed to create user: no access token");
         }
