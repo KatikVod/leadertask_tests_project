@@ -41,13 +41,13 @@ public class ProjectTests extends WebTestBase {
             projectPage.clickAddEmployeeButton();
         });
         step("Добавить сотрудника в проект", () -> {
-            employeesWindow.selectEmployee(testData.employeeEmail);
-            employeesWindow.clickAddButton();
+            employeesWindow.selectEmployee(testData.employeeEmail)
+                    .clickAddButton();
         });
         step("Проверить, что сотрудник отображается в свойствах проекта", () -> {
-            projectPage.clickActionsButton();
-            projectPage.clickProjectPropertiesButton();
-            projectPage.checkEmployeeIsAdded(testData.employeeEmail, testData.employeeName);
+            projectPage.clickActionsButton()
+                    .clickProjectPropertiesButton()
+                    .checkEmployeeIsAdded(testData.employeeEmail, testData.employeeName);
         });
     }
 
@@ -90,8 +90,8 @@ public class ProjectTests extends WebTestBase {
             projectPage.clickCreateSubprojectButton();
         });
         step("Заполнить название подпроекта и сохранить", () -> {
-            modalWindow.setValue("Подпроект");
-            modalWindow.clickSaveButton();
+            modalWindow.setValue("Подпроект")
+                    .clickSaveButton();
         });
         step("Проверить, что подпроект появился в дереве проектов", () -> {
             projectPage.checkProjectExist("Подпроект");
@@ -117,8 +117,8 @@ public class ProjectTests extends WebTestBase {
             projectPage.clickCreateSubprojectButton();
         });
         step("Заполнить название подпроекта и сохранить", () -> {
-            modalWindow.setValue("");
-            modalWindow.clickSaveButton();
+            modalWindow.setValue("")
+                    .clickSaveButton();
         });
         step("Проверить, что отображается ошибка", () -> {
             modalWindow.checkErrorMessage("Поле не должно быть пустым");

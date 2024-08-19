@@ -10,12 +10,14 @@ public class EmployeesWindow {
 
     private final SelenideElement addButton = $(byTagAndText("button", "Добавить"));
 
-    public void selectEmployee(String employeeEmail) {
+    public EmployeesWindow selectEmployee(String employeeEmail) {
         $("#modal-container").$(byText(employeeEmail)).click();
+        return this;
     }
 
-    public void clickAddButton() {
+    public EmployeesWindow clickAddButton() {
         addButton.click();
+        return this;
     }
 
 }
